@@ -1,0 +1,109 @@
+﻿{
+	"info": {
+		"name": "Plant Disease Detection API",
+		"description": "Postman collection for testing the Plant Disease Detection Flask app.\n\nBase URL (local): http://127.0.0.1:5000\nBase URL (Hugging Face): https://your-space-name.hf.space",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Home Page",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/",
+					"host": ["{{base_url}}"],
+					"path": [""]
+				},
+				"description": "Check that the home page loads successfully (status 200)."
+			}
+		},
+		{
+			"name": "2. AI Engine Page",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/index",
+					"host": ["{{base_url}}"],
+					"path": ["index"]
+				},
+				"description": "Load the image upload page."
+			}
+		},
+		{
+			"name": "3. Submit Prediction (with image)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/submit",
+					"host": ["{{base_url}}"],
+					"path": ["submit"]
+				},
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "test_images/AppleCedarRust1.JPG",
+							"description": "Upload a leaf image (e.g., from test_images folder)"
+						}
+					]
+				},
+				"description": "Upload a leaf image and get disease prediction.\n\nBefore running:\n1. Pick an image from the test_images/ folder\n2. Update the 'src' path to point to your chosen file."
+			}
+		},
+		{
+			"name": "4. Market / Store Page",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/market",
+					"host": ["{{base_url}}"],
+					"path": ["market"]
+				},
+				"description": "Load the supplement marketplace page listing all 39 diseases."
+			}
+		},
+		{
+			"name": "5. Contact Page",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/contact",
+					"host": ["{{base_url}}"],
+					"path": ["contact"]
+				},
+				"description": "Load the contact-us page."
+			}
+		},
+		{
+			"name": "6. Submit - No Image (Error Test)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/submit",
+					"host": ["{{base_url}}"],
+					"path": ["submit"]
+				},
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": "Test error handling: POST to /submit without an image file.\nExpected: 400 Bad Request or redirect."
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:5000",
+			"type": "string"
+		}
+	]
+}
